@@ -1,0 +1,44 @@
+{% load crispy_forms_tags %}
+
+
+<html>
+	Hi! This is your current banner
+
+
+
+	<form action="./" method="post" enctype="multipart/form-data"> 
+
+		{% crispy form_1 %}
+
+	    Select image to upload:	{% csrf_token %}
+	    <input type="file" name="fileToUploadname" id="fileToUploadid" onchange="previewFile()">
+	    <input type="submit" value="Upload Image" name="submit">
+	</form>
+
+	<div>
+		<h1> Preview:</h1>
+		<img src="" height="200" alt="Image preview...">
+
+	</div>
+
+	<script>
+	   function previewFile(){
+	       var preview = document.querySelector('img'); //selects the query named img
+	       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+	       var reader  = new FileReader();
+
+	       reader.onloadend = function () {
+	           preview.src = reader.result;
+	       }
+
+	       if (file) {
+	           reader.readAsDataURL(file); //reads the data as a URL
+	       } else {
+	           preview.src = "";
+	       }
+	  }
+
+	  previewFile();  //calls the function named previewFile()
+	  </script>
+
+</html>

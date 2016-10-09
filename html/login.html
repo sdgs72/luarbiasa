@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+	</head>
+	<body>
+	<div class="container">
+		<div class="well">
+			<form method="post" action="">{% csrf_token %}
+				<div class="username_container">
+					<span class="username_label">
+					username 
+					</span>
+					{{user_form.username}}
+				</div>
+				<div class="passowrd_container">
+					<span class="password_label">
+					password 
+					</span>
+					{{user_form.password}}
+				</div>
+				<div>
+					{{error_message}}
+				</div>
+				<input type="submit" class="btn btn-primary">			
+			</form>			
+		</div>
+	</div>
+	</body>
+</html>

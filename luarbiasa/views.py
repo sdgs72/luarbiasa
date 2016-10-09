@@ -7,11 +7,10 @@ from django.contrib.auth import logout,login,authenticate
 from django.shortcuts import redirect
 
 
-def index(request):
-	context = {}
-	return render(request,'live.html',context);
-	
-
 def live(request):
 	context = {}
 	return render(request,'live.html',context);
+
+def index(request):
+	context = {}
+	return render(request,'index.html',context);
