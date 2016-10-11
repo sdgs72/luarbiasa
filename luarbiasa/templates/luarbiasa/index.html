@@ -39,9 +39,10 @@
     var fuse = new Fuse(mall, options);
 
     $('#demo').bind('input', function(){
-      $('#demo_result').html("")
-        var result_arr = fuse.search($(this).val());
-        var result = []
+    $('#demo_result').html("")
+    var result_arr = fuse.search($(this).val());
+    var result = []
+    $('#demo_result').append("<h5>Total match: " + result_arr.length + " </h5>")
         for (var obj in result_arr){
             $('#demo_result').append("<ul> "+ result_arr[obj]["location"] + "</ul>")
         }
