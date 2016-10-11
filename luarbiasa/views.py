@@ -5,13 +5,16 @@ from django.core import serializers
 from django.db.models import Q
 from django.contrib.auth import logout,login,authenticate
 from django.shortcuts import redirect
-from .models import Deal,Retailer
-import pprint
-
-
+from .models import Deal,Retailer,constants
+import pprint, json
 
 def index(request):
-	context = {}
+	location_choices_obj = constants.LOCATION_CHOICES
+	location_choices = {}
+	for location in constants.LOCATION_CHOICES:
+		location_choices[location[1]] = location[0]
+	print location_choices
+	context = {"location_choices_obj": constants.LOCATION_CHOICES, "location_choices_str": json.dumps(location_choices)}
 	return render(request,'index.html',context);
 
 def getDealsByLocation(request):
@@ -31,3 +34,6 @@ def getDealsByLocation(request):
 		elem_retailer['deals'] = tempArr
 		myArr.append(elem_retailer)
 	return JsonResponse({"deals":myArr},safe=False)
+
+def getAllLocations(request):
+	return JsonResponse({"locations": constants.LOCATION_CHOICES})
