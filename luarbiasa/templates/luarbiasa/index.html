@@ -2,7 +2,6 @@
     {% load static %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/fuse/2.5.0/fuse.min.js"></script>
-    <script type="text/javascript" src="{% static "luarbiasa/fuzzy-autocomplete.js" %}"></script>
     <script type="text/javascript" src="{% static 'luarbiasa/mall.js' %}"></script>
 </head>
 <body>
@@ -27,38 +26,38 @@
     </div>
 <body>
 <script>
-var mall = getMall()["jakarta"]
-var options = {
-  shouldSort: true,
-  tokenize: true,
-  threshold: 0.3, //0.0 perfect - 1.0 non-perfect
-  location: 0,
-  distance: 100,
-  maxPatternLength: 32,
-  keys: ["location"]
-};
-var fuse = new Fuse(mall, options);
+    var mall = getMall()["jakarta"]
+    var options = {
+      shouldSort: true,
+      tokenize: true,
+      threshold: 0.4, //0.0 perfect - 1.0 non-perfect
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      keys: ["location"]
+    };
+    var fuse = new Fuse(mall, options);
 
-$('#demo').bind('input', function(){
-  $('#demo_result').html("")
-    var result_arr = fuse.search($(this).val());
-    var result = []
-    for (var obj in result_arr){
-        $('#demo_result').append("<ul> "+ result_arr[obj]["location"] + "</ul>")
-    }
-});
-$("#location_select").change( function(){
-    $("#location").val($(this).val())
-})
-$( "#myForm" ).submit(function( event ) {
-    console.log('onsubmit')
-    var location_input = $('#location').val()
-    $.get( "getDealsByLocation",
-        {'location': location_input},
-        function( data ) {
-            $( "#result" ).html( JSON.stringify(data, null, 4) );
-            console.log('finished loading')
-        });
-    event.preventDefault();
-});
+    $('#demo').bind('input', function(){
+      $('#demo_result').html("")
+        var result_arr = fuse.search($(this).val());
+        var result = []
+        for (var obj in result_arr){
+            $('#demo_result').append("<ul> "+ result_arr[obj]["location"] + "</ul>")
+        }
+    });
+    $("#location_select").change( function(){
+        $("#location").val($(this).val())
+    })
+    $( "#myForm" ).submit(function( event ) {
+        console.log('onsubmit')
+        var location_input = $('#location').val()
+        $.get( "getDealsByLocation",
+            {'location': location_input},
+            function( data ) {
+                $( "#result" ).html( JSON.stringify(data, null, 4) );
+                console.log('finished loading')
+            });
+        event.preventDefault();
+    });
 </script>
