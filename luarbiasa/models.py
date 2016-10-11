@@ -5,21 +5,11 @@ from django.contrib.auth.models import User
 #from .constants.py import 
 # Create your models here.
 
-class Item(models.Model):
-    item_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User,blank=True,null=True)
-    brand = models.CharField(max_length=200,blank=True)
-    location = models.CharField(max_length=200,blank=True)
-    image_url = models.CharField(max_length=200,blank=True)
-    creditcard = models.CharField(max_length=200,blank=True)
-    description = models.CharField(max_length=200,blank=True)
-    timestamp_start = models.CharField(max_length=200,blank=True)
-
 
 
 class Deals(models.Model):
-	id = models.AutoField(primary_key=True)
-	retailer_id = models.ForeignKey('Retailer')
+	id = models.AutoField(primary_key=True)		#indexing is enabled automatically for primary key
+	retailer_id = models.ForeignKey('Retailer') #indexing is enabled automatically for foreign key
 	credit_card = models.CharField(max_length=200,blank=True)
 	start_date = models.CharField(max_length=200,blank=True)
 	end_date = models.CharField(max_length=200,blank=True)
@@ -30,15 +20,15 @@ class Deals(models.Model):
 
 class Retailer(models.Model):
 	id = models.AutoField(primary_key=True)
-	brand_name = models.CharField(max_length=200,blank=True)
+	brand_name = models.CharField(max_length=200,blank=True) #indexing is enabled automatically for primary key
 	category = models.CharField(max_length=200,blank=True)
 	description = models.CharField(max_length=200,blank=True)
 	location = models.CharField(max_length=200,blank=True)
 	address = models.CharField(max_length=200,blank=True)
-	Longitude = models.CharField(max_length=200,blank=True)
+	longitude = models.CharField(max_length=200,blank=True)
 	latitude = models.CharField(max_length=200,blank=True)
 	picture_link = models.CharField(max_length=200,blank=True)
-	deals_id = models.CharField(max_length=200,blank=True)
+	#deals_id = models.CharField(max_length=200,blank=True)
 
 
 
