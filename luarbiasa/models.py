@@ -5,40 +5,58 @@ from django.contrib.auth.models import User
 #from .constants.py import 
 # Create your models here.
 
-class Item(models.Model):
-    item_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User,blank=True,null=True)
-    brand = models.CharField(max_length=200,blank=True)
-    location = models.CharField(max_length=200,blank=True)
-    image_url = models.CharField(max_length=200,blank=True)
-    creditcard = models.CharField(max_length=200,blank=True)
-    description = models.CharField(max_length=200,blank=True)
-    timestamp_start = models.CharField(max_length=200,blank=True)
+
+
+class constants():	
+	CC_CHOICES = (
+		('BNI','BNI'),
+		('BCA','BCA'),
+		('MANDIRI','MANDIRI'),
+		('MEGA','MEGA'),
+		('NONE','NONE'),
+	)
+	CATEGORY_CHOICES = (
+		('FASHION','FASHION'),
+		('ELECTRONIC','ELECTRONIC'),
+		('FOOD_AND_BEVERAGE','Food and Beverage'),
+	)
+	LOCATION_CHOICES = (
+		('MALL_KELAPA_GADING','Mall Kelapa Gading'),
+		('GRAND_INDONESIA','Grand Indonesia'),
+		('PONDOK_INDAH_MALL_1','Pondok Indah Mall 1'),
+		('PONDOK_INDAH_MALL_2','Pondok Indah Mall 2'),
+		('PONDOK_INDAH_MALL_3','Pondok Indah Mall 3'),	
+	)
+
+
+	
 
 
 
-class Deals(models.Model):
-	id = models.AutoField(primary_key=True)
-	retailer_id = models.ForeignKey('Retailer')
-	credit_card = models.CharField(max_length=200,blank=True)
-	start_date = models.CharField(max_length=200,blank=True)
-	end_date = models.CharField(max_length=200,blank=True)
-	is_active = models.CharField(max_length=200,blank=True)
-	summary = models.CharField(max_length=200,blank=True)
+class Deal(models.Model):
+	id = models.AutoField(primary_key=True)		#indexing is enabled automatically for primary key
+	retailer_id = models.ForeignKey('Retailer',blank=True) #indexing is enabled automatically for foreign key
+	credit_card = models.CharField(choices=constants.CC_CHOICES,max_length=20,blank=True,default='NONE')
+	start_date = models.DateTimeField(blank=True)
+	end_date = models.DateTimeField(blank=True)
+	#is_active = models.CharField(max_length=200,blank=True) 
+	summary = models.CharField(max_length=256,blank=True)
 	description = models.CharField(max_length=2000,blank=True)
-	picture_link = models.CharField(max_length=200,blank=True)
+	picture_link = models.CharField(max_length=512,blank=True)
 
 class Retailer(models.Model):
-	id = models.AutoField(primary_key=True)
-	brand_name = models.CharField(max_length=200,blank=True)
-	category = models.CharField(max_length=200,blank=True)
-	description = models.CharField(max_length=200,blank=True)
-	location = models.CharField(max_length=200,blank=True)
-	address = models.CharField(max_length=200,blank=True)
-	Longitude = models.CharField(max_length=200,blank=True)
-	latitude = models.CharField(max_length=200,blank=True)
-	picture_link = models.CharField(max_length=200,blank=True)
-	deals_id = models.CharField(max_length=200,blank=True)
+	id = models.AutoField(primary_key=True)					  #indexing is enabled automatically for primary key 
+	brand_name = models.CharField(max_length=256,blank=True)
+	category = models.CharField(choices=constants.CATEGORY_CHOICES,max_length=256,blank=True)
+	description = models.CharField(max_length=2000,blank=True)
+	location = models.CharField(max_length=256,choices=constants.LOCATION_CHOICES,blank=True)
+	address = models.CharField(max_length=256,blank=True)	
+	longitude = models.DecimalField(max_digits=9, decimal_places=6)
+	latitude = models.DecimalField(max_digits=9, decimal_places=6)
+	picture_link = models.CharField(max_length=512,blank=True)
+	def __str__(self):	
+		return self.brand_name
+	#deals_id = models.CharField(max_length=200,blank=True)
 
 
 
