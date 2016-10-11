@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from .views import live,index
+from .views import index,getDealsByLocation
 
 urlpatterns = [
-	url(r'^live/',live,name='live'),
 	url(r'^index/',index,name='index'),
-	url(r'^',index,name='index'),
+    url(r'^getDealsByLocation/',getDealsByLocation,name='getDealsByLocation'),
+	#url(r'^/',index,name='index'),
     url(r'^admin/', admin.site.urls),
 ]
