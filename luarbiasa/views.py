@@ -17,8 +17,9 @@ def index(request):
 def getDealsByLocation(request):
 	context = {}
 	myArr = []
-#   location = request.GET['location']
-	location = "MALL_KELAPA_GADING"
+	print request.GET['location']
+   	location = request.GET['location']
+	# location = "MALL_KELAPA_GADING"
 	retailer_list = Retailer.objects.filter(location=location).values()
 	q1 = Q()
 	for elem_retailer in retailer_list:
@@ -30,16 +31,3 @@ def getDealsByLocation(request):
 		elem_retailer['deals'] = tempArr
 		myArr.append(elem_retailer)
 	return JsonResponse({"deals":myArr},safe=False)
-
-
-
-'''
-{
-	'Retailer ID' : {
-
-	}		
-	
-
-
-}
-'''
