@@ -1,0 +1,25 @@
+<h1>Test Ajax</h1>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <form id="myForm">
+        <label> Location: </label>
+        <input id="location" type="text" style="width: 250px" value="MALL_KELAPA_GADING"/>
+        <input id="submit" type="submit" />
+    </form>
+    <div
+        <h4> Returned JSON: </h4>
+        <pre id="result"></pre>
+    </div>
+<script>
+$( "#myForm" ).submit(function( event ) {
+    console.log('onsubmit')
+    var location_input = $('#location').val()
+    $.get( "getDealsByLocation",
+        {'location': location_input},
+        function( data ) {
+            $( "#result" ).html( JSON.stringify(data, null, 4) );
+            console.log('finished loading')
+        });
+    event.preventDefault();
+});
+</script>
