@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 #from .constants.py import 
 # Create your models here.
 
-
-
 class constants():	
 	CC_CHOICES = (
 		('BNI','BNI'),
@@ -39,7 +37,7 @@ class Deal(models.Model):
 	description = models.CharField(max_length=2000,blank=True)
 	picture_link = models.CharField(max_length=512,blank=True)
 	def __str__(self):
-		return '%s: %s' % (self.retailer_id.brand_name, self.summary)
+		return '%s : %s : %s' % (self.retailer_id.brand_name, self.credit_card, self.summary)
 
 class Retailer(models.Model):
 	id = models.AutoField(primary_key=True)					  #indexing is enabled automatically for primary key 
