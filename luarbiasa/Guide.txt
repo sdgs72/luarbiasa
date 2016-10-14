@@ -1,0 +1,26 @@
+1. kalo ngerubah model
+python manage.py migrate auth
+python manage.py makemigrations luarbiasa 
+python manage.py migrate luarbiasa 
+python manage.py migrate 
+
+
+2. bikin superuser buat admin
+python manage.py createsuperuser 
+
+
+
+------------------------------------------------
+Target SQL QUERY
+   
+    SELECT * FROM Deals, Retailer WHERE
+        Deals.retailer_id = Retailer.id AND 
+        Retailer.Location = [] AND
+        Deals.end_date < Time.now
+------------------------------------------------
+ 
+type in console to disable collect static
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+to enable heroku config
+heroku config:set DISABLE_COLLECTSTATIC=1
