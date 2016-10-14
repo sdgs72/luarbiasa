@@ -9,6 +9,15 @@ python manage.py migrate
 python manage.py createsuperuser 
 
 
+3. push heroku
+heroku create wowdeals
+git push heroku master
+
+//syncing db
+heroku run python manage.py migrate
+heroku run python manage.py makemigrations
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
 
 ------------------------------------------------
 Target SQL QUERY
