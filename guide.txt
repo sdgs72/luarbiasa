@@ -19,3 +19,5 @@ Target SQL QUERY
         Deals.end_date < Time.now
 ------------------------------------------------
  
+type in console to disable collect static
+heroku config:set DISABLE_COLLECTSTATIC=1
